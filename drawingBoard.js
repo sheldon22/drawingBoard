@@ -1,5 +1,5 @@
 var canvas = document.getElementById('paint')
-var lineWidth = 6
+var lineWidth = 5
 // 设置页面宽高
 var pageSize = function(){
     var pageWidth = document.documentElement.clientWidth
@@ -14,18 +14,25 @@ window.onresize = function(){
 
 // 初始化canvas
 var context = canvas.getContext('2d') 
-function drawLine(x1,y1,x2,y2){
-    context.beginPath()
-    context.moveTo(x1,y1)
+function drawCircle(x,y,x1,y1){
     context.lineWidth = lineWidth
-    context.lineTo(x2,y2)
+    context.lineTo(x,y) 
     context.stroke()
+    context.beginPath()  
+    context.arc(x1, y1, radius, 0, 360, false) 
+    context.fill() 
+    context.beginPath() 
+    context.moveTo(x, y) 
     context.closePath()
 }
 
 // 默认关闭绘画模式
 var startUsing = false                   
 var lastPoint = {x: undefined, y: undefined}   
+
+
+
+
 
 // 增加橡皮擦  
 var eraserEnabled = false            
@@ -129,8 +136,8 @@ if(document.body.ontouchstart !== undefined){
         }else{
             if(startUsing){
                 var newPoint = {"x": x, "y": y}
-                drawLine(lastPoint.x,lastPoint.y,newPoint.x,newPoint.y)
-                lastPoint = newPoint
+                drawCircle(lastPoint.x,lastPoint.y,newPoint.x,newPoint.y)
+                //lastPoint = newPoint
             }  
         }       
     }
@@ -161,8 +168,8 @@ if(document.body.ontouchstart !== undefined){
         }else{
             if(startUsing){
                 var newPoint = {"x": x, "y": y}
-                drawLine(lastPoint.x,lastPoint.y,newPoint.x,newPoint.y)
-                lastPoint = newPoint
+                drawCircle(lastPoint.x,lastPoint.y,newPoint.x,newPoint.y)
+                //lastPoint = newPoint
             }  
         }       
     }
