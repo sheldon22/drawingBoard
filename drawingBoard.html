@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>drawingBoard</title>
+    <link rel="stylesheet" href="drawingBoard.css">
+    <script src="//at.alicdn.com/t/font_650589_izqhv8e8czbyb9.js"></script>
+</head>
+<body>
+    <canvas id="paint"></canvas>
+    <div id="svgType">
+        <svg id="draw" class="active">
+            <use xlink:href="#icon-pen"></use>
+        </svg>
+        <svg id="wipe">
+            <use xlink:href="#icon-erase"></use>
+        </svg>
+        <svg id="clearAll" title="重置">
+            <use xlink:href="#icon-clear" ></use>
+        </svg>
+        <svg id="downLoad">
+            <use xlink:href="#icon-download"></use>
+        </svg>
+    </div>
+    <ol class="colors">
+       <li id="red"     class="red"></li>
+       <li id="orange"  class="orange"></li>
+       <li id="yellow"  class="yellow"></li>
+       <li id="green"   class="green"></li>
+       <li id="cyan"    class="cyan"></li>
+       <li id="blue"    class="blue"></li>
+       <li id="purple"  class="purple"></li>
+       <li id="pink"    class="pink"></li> 
+       <li id="grey"    class="grey"></li>
+       <li id="black"   class="black active"></li>
+    </ol>
+    <ol class="size">
+        <li id="veryThin"   class="veryThin"    title="画笔类型:极细"></li>
+        <li id="thin"       class="thin"        title="画笔类型:细"></li>
+        <li id="normal"     class="normal"      title="画笔类型:正常"></li>
+        <li id="bold"       class="bold"        title="画笔类型:粗"></li>
+        <li id="veryBold"   class="veryBold"    title="画笔类型:极粗"></li>
+    </ol>
+    <script src="drawingBoard.js"></script>
+</body>
+</html>
