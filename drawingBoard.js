@@ -3,6 +3,11 @@ var canvas = document.getElementById('paint')
 canvas.width = document.documentElement.clientWidth
 canvas.height = document.documentElement.clientHeight 
 var context = canvas.getContext('2d') 
+var lineWidth = 6
+
+// 默认关闭绘画模式   
+var startUsing = false                                                
+var lastPoint = {x: undefined, y: undefined}  
 
 // 自适应
 window.onresize = function(){
@@ -22,10 +27,28 @@ function drawLine(x1,y1,x2,y2){
     context.closePath() 
 }
 
-// 默认关闭绘画模式   
-var startUsing = false                                                
-var lastPoint = {x: undefined, y: undefined}   
-var lineWidth = 6
+// 增加橡皮擦  
+var eraserEnabled = false        
+wipe.onclick = function(){
+    eraserEnabled = true
+    show()
+    wipe.classList.add('active')
+    draw.classList.remove('active') 
+}
+draw.onclick = function(){
+    eraserEnabled = false
+    hide()
+    draw.classList.add('active')
+    wipe.classList.remove('active')  
+}
+
+// 设置橡皮形状 
+function show(eraseImg){
+    document.getElementById('eraseImg').style.display="block";
+}
+function hide(eraseImg){
+    document.getElementById('eraseImg').style.display="none";  
+}  
 
 // 特性检测:是否是触屏设备
 if(document.body.ontouchstart !== undefined){
@@ -44,10 +67,10 @@ if(document.body.ontouchstart !== undefined){
     canvas.ontouchmove = function(move){    
         var x = move.touches[0].clientX
         var y = move.touches[0].clientY
-        if(eraserEnabled){
-            if(startUsing){
-                context.clearRect(x-15,y-15,30,30)
-            }
+        if(eraserEnabled){          // 橡皮随着鼠标移动
+            eraseImg.style.left = move.touches[0].clientX - 18 + "px";  
+            eraseImg.style.top = move.touches[0].clientY - 8 + "px"
+            context.clearRect(x-15,y-15,30,30)
         }else{
             if(startUsing){
                 var newPoint = {"x": x, "y": y}
@@ -72,14 +95,13 @@ if(document.body.ontouchstart !== undefined){
             lastPoint = {"x": x, "y": y}
         } 
     }
-
     canvas.onmousemove = function(move){
         var x = move.clientX
         var y = move.clientY
         if(eraserEnabled){
-            if(startUsing){
-                context.clearRect(x-15,y-15,30,30)
-            }
+            eraseImg.style.left = move.clientX - 18 + "px";  
+            eraseImg.style.top = move.clientY - 8 + "px"
+            context.clearRect(x-15,y-15,30,30)
         }else{
             if(startUsing){
                 var newPoint = {"x": x, "y": y}
@@ -88,24 +110,10 @@ if(document.body.ontouchstart !== undefined){
             }  
         }       
     }
-
     canvas.onmouseup = function(up){
         startUsing = false
     }
 }   
-
-// 增加橡皮擦  
-var eraserEnabled = false            
-wipe.onclick = function(){
-    eraserEnabled = true
-    wipe.classList.add('active')
-    draw.classList.remove('active')
-}
-draw.onclick = function(){
-    eraserEnabled = false
-    draw.classList.add('active')
-    wipe.classList.remove('active')
-}
 
 // 改变画笔颜色
 red.onclick = function(){
@@ -171,6 +179,3 @@ downLoad.onclick = function(){
     a.target = "_blank"
     a.click()
 }
-
-
-   

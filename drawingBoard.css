@@ -4,7 +4,7 @@
     margin: 0;
 }
 body{
-    overflow: hidden;
+    overflow: hidden;   /*不要出现滚动条*/
 }
 ol,li{
     list-style: none;
@@ -43,6 +43,17 @@ ol,li{
     top: 0;
     right: 0;
     padding: 20px 20px;
+}
+
+/*橡皮样式*/
+#eraseImg{ 
+    border: 6px solid #F3B6B6;
+    background: #F3B6B6;
+    width:  36px;
+    height: 18px;
+    position: absolute;
+    border-radius: 6px;
+    animation-duration: 1s;
 }
 
 /*画笔颜色设置*/
