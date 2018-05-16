@@ -49,7 +49,7 @@ ol,li{
 }
 
 /*橡皮样式*/
-#eraseImg{ 
+div.active { 
     border: 6px solid #F3B6B6;
     background: #F3B6B6;
     width:  36px;

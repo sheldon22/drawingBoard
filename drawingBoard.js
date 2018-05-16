@@ -34,12 +34,14 @@ wipe.onclick = function(){
     show()
     wipe.classList.add('active')
     draw.classList.remove('active') 
+    eraseImg.classList.add('active')
 }
 draw.onclick = function(){
     eraserEnabled = false
     hide()
     draw.classList.add('active')
     wipe.classList.remove('active')  
+    eraseImg.classList.remove('active')
 }
 
 // 设置橡皮形状 
